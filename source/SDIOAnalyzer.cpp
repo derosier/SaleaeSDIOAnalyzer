@@ -26,7 +26,7 @@
 
 
 SDIOAnalyzer::SDIOAnalyzer()
-:	Analyzer(),  
+:	Analyzer2(),  
 	mSettings( new SDIOAnalyzerSettings() ),
 	mSimulationInitilized( false ),
 	mAlreadyRun(false),
@@ -43,18 +43,7 @@ SDIOAnalyzer::~SDIOAnalyzer()
 
 void SDIOAnalyzer::WorkerThread()
 {
-	mResults.reset( new SDIOAnalyzerResults(this, mSettings.get()));
-
 	mAlreadyRun = true;
-
-	SetAnalyzerResults( mResults.get());
-
-	// mResults->AddChannelBubblesWillAppearOn(mSettings->mClockChannel);
-	mResults->AddChannelBubblesWillAppearOn(mSettings->mCmdChannel);
-	// mResults->AddChannelBubblesWillAppearOn(mSettings->mDAT0Channel);
-	// mResults->AddChannelBubblesWillAppearOn(mSettings->mDAT1Channel);
-	// mResults->AddChannelBubblesWillAppearOn(mSettings->mDAT2Channel);
-	// mResults->AddChannelBubblesWillAppearOn(mSettings->mDAT3Channel);
 
 	mClock = GetAnalyzerChannelData(mSettings->mClockChannel);
 	mCmd = GetAnalyzerChannelData(mSettings->mCmdChannel);
@@ -76,6 +65,13 @@ void SDIOAnalyzer::WorkerThread()
 		mResults->CommitResults();
 		ReportProgress(mClock->GetSampleNumber());
 	}
+}
+
+void SDIOAnalyzer::SetupResults()
+{
+	mResults.reset( new SDIOAnalyzerResults(this, mSettings.get()));
+	SetAnalyzerResults( mResults.get());
+	mResults->AddChannelBubblesWillAppearOn(mSettings->mCmdChannel);
 }
 
 //Determine whether or not we are in a packet

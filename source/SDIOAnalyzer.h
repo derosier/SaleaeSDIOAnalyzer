@@ -28,12 +28,14 @@
 #include "SDIOSimulationDataGenerator.h"
 
 class SDIOAnalyzerSettings;
-class ANALYZER_EXPORT SDIOAnalyzer : public Analyzer
+class ANALYZER_EXPORT SDIOAnalyzer : public Analyzer2
 {
 public:
 	SDIOAnalyzer();
 	virtual ~SDIOAnalyzer();
 	virtual void WorkerThread();
+
+	virtual void SetupResults();
 
 	virtual U32 GenerateSimulationData( U64 newest_sample_requested, U32 sample_rate, SimulationChannelDescriptor** simulation_channels );
 	virtual U32 GetMinimumSampleRateHz();

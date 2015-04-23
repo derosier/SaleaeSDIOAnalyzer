@@ -125,12 +125,12 @@ void SDIOAnalyzerResults::GenerateExportFile( const char* file, DisplayBase disp
 
 void SDIOAnalyzerResults::GenerateFrameTabularText( U64 frame_index, DisplayBase display_base )
 {
-	// Frame frame = GetFrame( frame_index );
-	// ClearResultStrings();
-
 	// char number_str[128];
+	// Frame frame = GetFrame( frame_index );
+	ClearTabularText();
+
 	// AnalyzerHelpers::GetNumberString( frame.mData1, display_base, 8, number_str, 128 );
-	// AddResultString( number_str );
+	// AddTabularText( number_str );
 }
 
 void SDIOAnalyzerResults::GeneratePacketTabularText( U64 packet_id, DisplayBase display_base )
@@ -144,3 +144,5 @@ void SDIOAnalyzerResults::GenerateTransactionTabularText( U64 transaction_id, Di
 	ClearResultStrings();
 	AddResultString( "not supported" );
 }
+
+
